@@ -46,6 +46,20 @@ function playRound(userSelection, computerSelection) {
     }
 }
 
+function collectAndValidateUserInput() {
+    let input = prompt("Rock, paper, or scissors?").toLowerCase();
+    let validInput = false;
+    while (!validInput) {
+        if (input === "rock" || input === "paper" || input === "scissors") {
+            validInput = true;
+            return input;
+        }
+        else {
+            input = prompt("Rock, paper, or scissors?").toLowerCase();
+        }
+    }
+}
+
 function playGame() {
     let round = 1;
     while (round <= 5) {
@@ -75,19 +89,5 @@ function playGame() {
             Game Over
             It's a draw!
         `)
-    }
-}
-
-function collectAndValidateUserInput() {
-    let input = prompt("Rock, paper, or scissors?").toLowerCase();
-    let validInput = false;
-    while (!validInput) {
-        if (input === "rock" || input === "paper" || input === "scissors") {
-            validInput = true;
-            return input;
-        }
-        else {
-            input = prompt("Rock, paper, or scissors?").toLowerCase();
-        }
     }
 }
