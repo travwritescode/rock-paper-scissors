@@ -1,3 +1,10 @@
+let userScore = 0;
+let computerScore = 0;
+
+playGame()
+
+//Helper Functions
+
 function getComputerChoice() {
     let rand = Math.floor(Math.random() * 3) + 1;
 
@@ -42,34 +49,45 @@ function playRound(userSelection, computerSelection) {
 function playGame() {
     let round = 1;
     while (round <= 5) {
-        let userChoice = prompt("Rock, paper, or scissors?").toLowerCase();
+        userChoice = collectAndValidateUserInput();
         console.log(playRound(userChoice, getComputerChoice()));
+        console.log(`
+            Round ${round}:
+            User: ${userScore}
+            Computer: ${computerScore}
+        `)
         round++;
     }
     if (userScore > computerScore) {
         console.log(`
-            User: ${userScore}
-            Computer: ${computerScore}
+            Game Over
             Congratulations, you win!
         `)
     }
     else if (userScore < computerScore) {
         console.log(`
-            User: ${userScore}
-            Computer: ${computerScore}
+            Game Over
             You lose. Better luck next time!
         `)
     }
     else {
         console.log(`
-            User: ${userScore}
-            Computer: ${computerScore}
+            Game Over
             It's a draw!
         `)
     }
 }
 
-let userScore = 0;
-let computerScore = 0;
-
-playGame()
+function collectAndValidateUserInput() {
+    let input = prompt("Rock, paper, or scissors?").toLowerCase();
+    let validInput = false;
+    while (!validInput) {
+        if (input === "rock" || input === "paper" || input === "scissors") {
+            validInput = true;
+            return input;
+        }
+        else {
+            input = prompt("Rock, paper, or scissors?").toLowerCase();
+        }
+    }
+}
