@@ -1,6 +1,22 @@
 let userScore = 0;
 let computerScore = 0;
 
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const userSelection = button.className;
+        const resultsDiv = document.querySelector('.results');
+        resultsDiv.textContent = playRound(userSelection, getComputerChoice());
+
+        const scoreDiv = document.querySelector('.score');
+        scoreDiv.textContent = `
+            User: ${userScore}
+            Computer: ${computerScore}
+        `;
+    })
+})
+
+
 //Helper Functions
 
 function getComputerChoice() {
@@ -21,14 +37,6 @@ function getComputerChoice() {
 
     return computerChoice;
 }
-
-const buttons = document.querySelectorAll('button');
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        let userSelection = button.className;
-        console.log(playRound(userSelection, getComputerChoice()));
-    })
-})
 
 function playRound(userSelection, computerSelection) {
     if (userSelection === computerSelection) {
