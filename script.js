@@ -1,8 +1,6 @@
 let userScore = 0;
 let computerScore = 0;
 
-playGame()
-
 //Helper Functions
 
 function getComputerChoice() {
@@ -23,6 +21,14 @@ function getComputerChoice() {
 
     return computerChoice;
 }
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let userSelection = button.className;
+        console.log(playRound(userSelection, getComputerChoice()));
+    })
+})
 
 function playRound(userSelection, computerSelection) {
     if (userSelection === computerSelection) {
@@ -62,16 +68,16 @@ function collectAndValidateUserInput() {
 
 function playGame() {
     let round = 1;
-    while (round <= 5) {
-        userChoice = collectAndValidateUserInput();
-        console.log(playRound(userChoice, getComputerChoice()));
-        console.log(`
-            Round ${round}:
-            User: ${userScore}
-            Computer: ${computerScore}
-        `)
-        round++;
-    }
+    // while (round <= 5) {
+    //     userChoice = collectAndValidateUserInput();
+    //     console.log(playRound(userChoice, getComputerChoice()));
+    //     console.log(`
+    //         Round ${round}:
+    //         User: ${userScore}
+    //         Computer: ${computerScore}
+    //     `)
+    //     round++;
+    // }
     if (userScore > computerScore) {
         console.log(`
             Game Over
