@@ -7,12 +7,15 @@ buttons.forEach((button) => {
         const userSelection = button.className;
         const resultsDiv = document.querySelector('.results');
         resultsDiv.textContent = playRound(userSelection, getComputerChoice());
-
         const scoreDiv = document.querySelector('.score');
         scoreDiv.textContent = `
             User: ${userScore}
             Computer: ${computerScore}
         `;
+        if (checkGameOver()) {
+            document.querySelector('.game-over').textContent = displayWinner();
+        }
+
     })
 })
 
@@ -60,6 +63,20 @@ function playRound(userSelection, computerSelection) {
     }
 }
 
+function checkGameOver() {
+    if (userScore === 5 || computerScore === 5) {
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach((button) => {
+            button.remove();
+        })
+
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function collectAndValidateUserInput() {
     let input = prompt("Rock, paper, or scissors?").toLowerCase();
     let validInput = false;
@@ -74,32 +91,30 @@ function collectAndValidateUserInput() {
     }
 }
 
-function playGame() {
-    let round = 1;
-    // while (round <= 5) {
-    //     userChoice = collectAndValidateUserInput();
-    //     console.log(playRound(userChoice, getComputerChoice()));
-    //     console.log(`
-    //         Round ${round}:
-    //         User: ${userScore}
-    //         Computer: ${computerScore}
-    //     `)
-    //     round++;
-    // }
+function checkWinner(playerScore, computerScore) {
+    if (playerScore === 5) {
+        return "You win!"
+    }
+    else if (computerScore === 5) {
+        return "You lose!";
+    }
+}
+
+function displayWinner() {
     if (userScore > computerScore) {
-        console.log(`
+        return (`
             Game Over
             Congratulations, you win!
         `)
     }
     else if (userScore < computerScore) {
-        console.log(`
+        return (`
             Game Over
             You lose. Better luck next time!
         `)
     }
     else {
-        console.log(`
+        return (`
             Game Over
             It's a draw!
         `)
